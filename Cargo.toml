@@ -1,6 +1,6 @@
 [package]
 name = "polyhedron-ops"
-version = "0.2.9"
+version = "0.2.10"
 authors = ["Moritz Moeller <virtualritz@gmail.com>"]
 edition = "2021"
 keywords = ["3d", "creative", "geometry", "graphics", "rendering"]
@@ -12,15 +12,72 @@ repository = "https://github.com/virtualritz/polyhedron-ops/"
 documentation = "https://docs.rs/polyhedron-ops/"
 
 [features]
-default = []
+default = ["ops"]
 # Add support for reading/writing a mesh out as a Wavefront OBJ.
 obj = ["tobj"]
 # Add support for parsing Conway notation strings and turning them back into polyhedra.
-parser = ["pest", "pest_derive"]
+parser = ["ops", "pest", "pest_derive"]
 nsi = ["nsi-core", "bytemuck"]
 bevy = ["dep:bevy", "bevy_panorbit_camera"]
 tilings = []
 console = ["bevy", "parser", "bevy_console", "clap"]
+
+ops = [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "g",
+    "i",
+    "j",
+    "k",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "v",
+    "w",
+    "x",
+    "z",
+    "K",
+    "M",
+    "N",
+    "S",
+    "Z",
+]
+
+# Operators
+a = []         # (a)mbo
+b = ["a", "t"] # (b)evel
+c = []         # (c)hamfer
+d = []         # (d)ual
+e = []         # (e)xpand
+g = []         # (g)yro
+i = []         # (i)nset
+j = []         # (j)oin
+k = []         # (k)is
+m = []         # (m)eta
+n = []         # (n)eedle
+o = []         # (o)rtho
+p = []         # (p)ropellor
+q = []         # (q)uinto
+r = []         # (r)eflect
+s = []         # (s)nub
+t = []         # (t)runcate
+v = []         # subdi(v)ide
+w = []         # (w)hirl
+x = []         # e(x)trude
+z = []         # (z)ip
+K = []         # (K)-plane
+M = []         # (M)edial
+N = []         # ca(N)onicalize
+S = []         # (S)pherize
+Z = []         # (Z)-triangulate
 
 [dependencies]
 # Add support to convert a Polyhedron into a bevy Mesh.
@@ -51,6 +108,7 @@ slice-of-array = "0.3"
 [target.'cfg(target_os = "linux")'.dependencies.bevy]
 version = "*"
 features = ["x11", "wayland"]
+optional = true
 
 [profile.dev]
 opt-level = 1

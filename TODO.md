@@ -1,0 +1,8 @@
+- Create inset_kis for "i" (dk)
+- Rename extrude to ???
+- Create qt for x
+- Fix unwraps
+- average_normal_ref return Normal rather than Some(Normal)
+- breakout operators into separate files
+- rename planarize to plane
+- replace name with operation list

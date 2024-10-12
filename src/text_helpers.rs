@@ -1,5 +1,6 @@
 use num_traits::{Float, FromPrimitive};
-use std::fmt::{Display, Write};
+use std::fmt::Display;
+pub use std::fmt::Write; // FIXME
 
 #[inline]
 pub(crate) fn format_float<T>(x: T) -> String

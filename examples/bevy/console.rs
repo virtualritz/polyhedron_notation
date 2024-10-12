@@ -45,6 +45,7 @@ pub fn render_command(
                 info!("Rendered polyhedron: {name}")
             }
             Err(e) => error!("Unable to render polyhedron: {e:?}"),
+            // TODO: write to console
         }
     }
 }

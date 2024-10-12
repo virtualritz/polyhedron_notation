@@ -58,7 +58,7 @@
 //! * `parser` – Add support for parsing strings in [Conway Polyhedron Notation](https://en.wikipedia.org/wiki/Conway_polyhedron_notation).
 //!   This feature implements
 //!   [`Polyhedron::TryFrom<&str>`](Polyhedron::try_from<&str>).
-use crate::helpers::*;
+use crate::{helpers::*, selection::*, text_helpers::*}; /* FIXME: single helpers module */
 use itertools::Itertools;
 use rayon::prelude::*;
 use ultraviolet as uv;
@@ -70,14 +70,11 @@ mod base_polyhedra;
 mod helpers;
 mod io;
 mod mesh_buffers;
-mod operators;
+pub mod operators;
 #[cfg(feature = "parser")]
 mod parser;
 mod selection;
 mod text_helpers;
-
-#[cfg(test)]
-mod tests;
 
 static EPSILON: f32 = 0.00000001;
 
@@ -116,6 +113,16 @@ pub struct Polyhedron {
 impl Default for Polyhedron {
     fn default() -> Self {
         Self::new()
+    }
+}
+
+impl PartialEq for Polyhedron {
+    fn eq(&self, other: &Self) -> bool {
+        !(self.positions.len() != other.positions.len()
+            || self
+                .positions
+                .iter()
+                .any(|p: &Point| !other.positions.contains(p)))
     }
 }
 
@@ -227,7 +234,7 @@ impl Polyhedron {
     }
 
     #[inline]
-    pub(crate) fn positions_len(&self) -> usize {
+    pub fn positions_len(&self) -> usize {
         self.positions.len()
     }
 
