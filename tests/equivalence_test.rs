@@ -42,8 +42,9 @@ mod equivalence_operator_tests {
 
     #[test]
     fn equivalence_dd_nop() {
-        let D = Polyhedron::dodecahedron().finalize();
-        let ddD = D.clone().d().d().finalize();
+        let D = Polyhedron::dodecahedron().normalize().finalize();
+        let ddD = D.clone().d().d().normalize().finalize();
+
         assert_eq!(D, ddD);
     }
 
@@ -52,7 +53,6 @@ mod equivalence_operator_tests {
         let ztI = Polyhedron::icosahedron()
             .truncate(None, None, None, true)
             .zip(None, None, None, true)
-            .normalize()
             .finalize();
         let ttD = Polyhedron::dodecahedron()
             .truncate(None, None, None, true)

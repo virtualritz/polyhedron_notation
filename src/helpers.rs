@@ -1,5 +1,5 @@
 use crate::*;
-use uv::DVec3;
+use ultraviolet::DVec3;
 
 // Extend a vector with some element(s)
 // ```
@@ -374,7 +374,7 @@ pub(crate) fn _planar_area_ref(positions: &PointsRefSlice) -> Float {
 }
 
 #[inline]
-fn _sig_figs(val: Float) -> [u8; 4] {
+fn _sig_figs(val: Float) -> [u8; FLOAT_SIZE] {
     val.to_ne_bytes()
 }
 
@@ -463,7 +463,7 @@ pub(crate) fn average_normal_ref(positions: &PointsRefSlice) -> Option<Normal> {
         });
 
     if considered_edges != 0 {
-        Some(normal / considered_edges as f32)
+        Some(normal / considered_edges as Float)
     } else {
         // Degenerate/zero size face.
         //None

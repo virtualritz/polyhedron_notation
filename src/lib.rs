@@ -61,7 +61,7 @@
 use crate::{helpers::*, selection::*, text_helpers::*}; /* FIXME: single helpers module */
 use itertools::Itertools;
 use rayon::prelude::*;
-use ultraviolet as uv;
+
 #[cfg(feature = "parser")]
 #[macro_use]
 extern crate pest_derive;
@@ -75,29 +75,10 @@ pub mod operators;
 mod parser;
 mod selection;
 mod text_helpers;
+mod types;
+use crate::types::*;
 
-static EPSILON: f32 = 0.00000001;
-
-pub type Float = f32;
-pub type VertexKey = u32;
-pub type FaceKey = u32;
-pub type Face = Vec<VertexKey>;
-pub(crate) type FaceSlice = [VertexKey];
-pub type Faces = Vec<Face>;
-pub(crate) type FacesSlice = [Face];
-pub type FaceSet = Vec<VertexKey>;
-pub type Edge = [VertexKey; 2];
-pub type Edges = Vec<Edge>;
-pub type EdgesSlice = [Edge];
-pub(crate) type _EdgeSlice = [Edge];
-pub type Point = uv::vec::Vec3;
-pub type Vector = uv::vec::Vec3;
-pub type Normal = Vector;
-#[allow(dead_code)]
-pub type Normals = Vec<Normal>;
-pub type Points = Vec<Point>;
-pub(crate) type PointsSlice = [Point];
-pub(crate) type PointsRefSlice<'a> = [&'a Point];
+static EPSILON: Float = 0.00000001;
 
 #[derive(Clone, Debug)]
 pub struct Polyhedron {

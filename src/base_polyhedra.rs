@@ -183,7 +183,7 @@ impl Polyhedron {
         let n = n.unwrap_or(3);
 
         // Angles.
-        let theta = f32::TAU() / n as f32;
+        let theta = Float::TAU() / n as Float;
         let twist = if anti { theta / 2.0 } else { 0.0 };
         // Half-edge.
         let h = (theta * 0.5).sin();
@@ -228,16 +228,16 @@ impl Polyhedron {
             positions: (0..n)
                 .map(move |i| {
                     Point::new(
-                        (i as f32 * theta).cos() as _,
+                        (i as Float * theta).cos() as _,
                         h,
-                        (i as f32 * theta).sin() as _,
+                        (i as Float * theta).sin() as _,
                     )
                 })
                 .chain((0..n).map(move |i| {
                     Point::new(
-                        (twist + i as f32 * theta).cos() as _,
+                        (twist + i as Float * theta).cos() as _,
                         -h,
-                        (twist + i as f32 * theta).sin() as _,
+                        (twist + i as Float * theta).sin() as _,
                     )
                 }))
                 .collect(),

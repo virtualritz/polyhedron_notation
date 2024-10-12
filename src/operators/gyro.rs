@@ -16,8 +16,8 @@ impl Polyhedron {
     /// * `change_name` – Whether to change the name of the mesh.
     pub fn gyro(
         &mut self,
-        ratio: Option<f32>,
-        height: Option<f32>,
+        ratio: Option<Float>,
+        height: Option<Float>,
         change_name: bool,
     ) -> &mut Self {
         let ratio = match ratio {

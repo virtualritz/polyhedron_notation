@@ -23,7 +23,13 @@ impl From<Polyhedron> for Mesh {
             VertexAttributeValues::Float32x3(
                 positions
                     .par_iter()
-                    .map(|p| [p.x, p.y, p.z])
+                    .map(|p| {
+                        [
+                            p.x as RenderFloat,
+                            p.y as RenderFloat,
+                            p.z as RenderFloat,
+                        ]
+                    })
                     .collect::<Vec<_>>(),
             ),
         );
@@ -33,7 +39,13 @@ impl From<Polyhedron> for Mesh {
             VertexAttributeValues::Float32x3(
                 normals
                     .par_iter()
-                    .map(|n| [-n.x, -n.y, -n.z])
+                    .map(|n| {
+                        [
+                            -n.x as RenderFloat,
+                            -n.y as RenderFloat,
+                            -n.z as RenderFloat,
+                        ]
+                    })
                     .collect::<Vec<_>>(),
             ),
         );

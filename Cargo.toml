@@ -12,7 +12,8 @@ repository = "https://github.com/virtualritz/polyhedron-ops/"
 documentation = "https://docs.rs/polyhedron-ops/"
 
 [features]
-default = ["ops"]
+default = ["f64", "ops"]
+f64 = []
 # Add support for reading/writing a mesh out as a Wavefront OBJ.
 obj = ["tobj"]
 # Add support for parsing Conway notation strings and turning them back into polyhedra.
