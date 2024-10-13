@@ -1,5 +1,6 @@
 use crate::*;
 
+// NOTE: conway2.scad uses ratio of 1. / 3.
 const DEFAULT_CHAMFER_RATIO: Float = 1. / 2.;
 const MAX_CHAMFER_RATIO: Float = 1.;
 const MIN_CHAMFER_RATIO: Float = 0.;
@@ -89,6 +90,7 @@ impl Polyhedron {
 
         self.face_index = face_index;
         self.positions.par_iter_mut().for_each(|point| {
+            // NOTE: Calculation based on update in conway2.scad
             *point = (1.0 - ratio) * *point;
         });
         self.positions.extend(vertex_values(&new_positions));
