@@ -97,13 +97,20 @@ impl Default for Polyhedron {
     }
 }
 
+const EQ_PRECISION: u32 = 4u32;
+
 impl PartialEq for Polyhedron {
     fn eq(&self, other: &Self) -> bool {
-        !(self.positions.len() != other.positions.len()
+        let other: Points = other
+            .positions
+            .par_iter()
+            .map(|p| p.precision(EQ_PRECISION))
+            .collect();
+        !(self.positions.len() != other.len()
             || self
                 .positions
-                .iter()
-                .any(|p: &Point| !other.positions.contains(p)))
+                .par_iter()
+                .any(|p: &Point| !other.contains(&p.precision(EQ_PRECISION))))
     }
 }
 
