@@ -1,6 +1,6 @@
 use crate::*;
 
-const DEFAULT_ORTHO_RATIO: Float = 0.;
+const DEFAULT_ORTHO_RATIO: Float = 1. / 2.;
 
 impl Polyhedron {
     /// Connects the center of each face to the center of each edge.

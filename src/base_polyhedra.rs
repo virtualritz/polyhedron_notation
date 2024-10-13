@@ -4,6 +4,7 @@ use num_traits::float::FloatConst;
 /// # Base Shapes
 ///
 /// Start shape creation methods.
+#[allow(non_snake_case)]
 impl Polyhedron {
     pub fn tetrahedron() -> Self {
         let c0 = 1.0;
@@ -24,6 +25,11 @@ impl Polyhedron {
             face_set_index: vec![(0..4).collect()],
             name: String::from("T"),
         }
+    }
+
+    #[inline]
+    pub fn T() -> Self {
+        Self::tetrahedron()
     }
 
     pub fn hexahedron() -> Self {
@@ -59,6 +65,11 @@ impl Polyhedron {
         Self::hexahedron()
     }
 
+    #[inline]
+    pub fn C() -> Self {
+        Self::cube()
+    }
+
     pub fn octahedron() -> Self {
         let c0 = 0.707_106_77;
 
@@ -84,6 +95,11 @@ impl Polyhedron {
             face_set_index: vec![(0..8).collect()],
             name: String::from("O"),
         }
+    }
+
+    #[inline]
+    pub fn O() -> Self {
+        Self::octahedron()
     }
 
     pub fn dodecahedron() -> Self {
@@ -132,6 +148,11 @@ impl Polyhedron {
         }
     }
 
+    #[inline]
+    pub fn D() -> Self {
+        Self::dodecahedron()
+    }
+
     pub fn icosahedron() -> Self {
         let c0 = 0.809_017;
 
@@ -177,8 +198,12 @@ impl Polyhedron {
         }
     }
 
-    /// common code for prism and antiprism
     #[inline]
+    pub fn I() -> Self {
+        Self::icosahedron()
+    }
+
+    /// common code for prism and antiprism
     fn protoprism(n: Option<usize>, anti: bool) -> Self {
         let n = n.unwrap_or(3);
 
@@ -247,11 +272,23 @@ impl Polyhedron {
         }
     }
 
+    #[inline]
     pub fn prism(n: Option<usize>) -> Self {
         Self::protoprism(n, false)
     }
 
+    #[inline]
+    pub fn P(n: Option<usize>) -> Self {
+        Self::prism(n)
+    }
+
+    #[inline]
     pub fn antiprism(n: Option<usize>) -> Self {
         Self::protoprism(n, true)
+    }
+
+    #[inline]
+    pub fn A(n: Option<usize>) -> Self {
+        Self::antiprism(n)
     }
 }

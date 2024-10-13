@@ -5,3 +5,4 @@
 - average_normal_ref return Normal rather than Some(Normal)
 - rename planarize to plane
 - replace name with operation list
+- parser macro for string to functions
