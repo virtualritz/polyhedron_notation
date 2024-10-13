@@ -33,4 +33,10 @@ impl Polyhedron {
 
         self
     }
+
+    #[warn(non_snake_case)]
+    #[inline]
+    pub fn S(&mut self) -> &mut Self {
+        self.spherize(None, true)
+    }
 }
