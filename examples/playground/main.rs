@@ -40,7 +40,7 @@ fn into_mesh(polyhedron: Polyhedron) -> Mesh {
         // match the normals per face.
         points
             .par_iter()
-            .map(|p| na::Point3::<f32>::new(p.x, p.y, p.z))
+            .map(|p| na::Point3::<f32>::new(p.x as f32, p.y as f32, p.z as f32))
             .collect::<Vec<_>>(),
         face_index
             .iter()
@@ -50,7 +50,7 @@ fn into_mesh(polyhedron: Polyhedron) -> Mesh {
         Some(
             normals
                 .par_iter()
-                .map(|n| na::Vector3::new(n.x, n.y, n.z))
+                .map(|n| na::Vector3::new(n.x as f32, n.y as f32, n.z as f32))
                 .collect::<Vec<_>>(),
         ),
         None,
