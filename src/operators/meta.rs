@@ -30,25 +30,29 @@ impl Polyhedron {
             None => DEFAULT_META_HEIGHT,
         };
 
-        // FIXME: m != kj != db
+        #[cfg(not(feature = "alt"))]
+        {
+            self.join(Some(ratio), false);
+            self.kis(
+                Some(height),
+                vertex_valence_mask,
+                None,
+                regular_faces_only,
+                false,
+            );
+        }
 
-        self.join(Some(ratio), false);
-        self.kis(
-            Some(height),
-            vertex_valence_mask,
-            None,
-            regular_faces_only,
-            false,
-        );
-
-        /*self.bevel(
-            Some(ratio),
-            Some(height),
-            vertex_valence_mask,
-            regular_faces_only,
-            change_name,
-        );
-        self.dual(change_name);*/
+        #[cfg(feature = "alt")]
+        {
+            self.bevel(
+                Some(ratio),
+                Some(height),
+                vertex_valence_mask,
+                regular_faces_only,
+                change_name,
+            );
+            self.dual(change_name);
+        }
 
         if change_name {
             let mut params = match ratio != DEFAULT_META_RATIO

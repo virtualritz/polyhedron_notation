@@ -13,6 +13,7 @@ documentation = "https://docs.rs/polyhedron-ops/"
 
 [features]
 default = ["ops"]
+alt = []          # Use alternative implementations for some operators
 f64 = []
 # Add support for reading/writing a mesh out as a Wavefront OBJ.
 obj = ["tobj"]
@@ -23,6 +24,7 @@ bevy = ["dep:bevy", "bevy_panorbit_camera"]
 tilings = []
 console = ["bevy", "parser", "bevy_console", "clap"]
 
+# Enabled Operators
 ops = [
     "a",
     "b",
@@ -52,33 +54,33 @@ ops = [
     "Z",
 ]
 
-# Operators
-a = []         # (a)mbo
-b = ["a", "t"] # (b)evel
-c = []         # (c)hamfer
-d = []         # (d)ual
-e = []         # (e)xpand
-g = []         # (g)yro
-i = []         # (i)nset
-j = []         # (j)oin
-k = []         # (k)is
-m = []         # (m)eta
-n = []         # (n)eedle
-o = []         # (o)rtho
-p = []         # (p)ropellor
-q = []         # (q)uinto
-r = []         # (r)eflect
-s = []         # (s)nub
-t = []         # (t)runcate
-v = []         # subdi(v)ide
-w = []         # (w)hirl
-x = []         # e(x)trude
-z = []         # (z)ip
-K = []         # (K)-plane
-M = []         # (M)edial
-N = []         # ca(N)onicalize
-S = []         # (S)pherize
-Z = []         # (Z)-triangulate
+# Operator Definitions
+a = []                   # (a)mbo
+b = ["t", "a"]           # (b)evel
+c = []                   # (c)hamfer
+d = []                   # (d)ual
+e = ["a", "a"]           # (e)xpand
+g = []                   # (g)yro
+i = ["x"]                # (i)nset
+j = ["d", "a", "d"]      # (j)oin
+k = []                   # (k)is
+m = ["k", "j", "d", "b"] # (m)eta
+n = ["d", "t"]           # (n)eedle
+o = ["j", "j"]           # (o)rtho
+p = []                   # (p)ropellor
+q = []                   # (q)uinto
+r = []                   # (r)eflect
+s = ["d", "g", "d"]      # (s)nub
+t = ["d", "k", "d"]      # (t)runcate
+v = []                   # subdi(v)ide
+w = []                   # (w)hirl
+x = []                   # e(x)trude
+z = ["d", "k"]           # (z)ip
+K = ["d"]                # (K)-plane
+M = ["d", "t", "a"]      # (M)edial
+N = []                   # ca(N)onicalize
+S = []                   # (S)pherize
+Z = []                   # (Z)-triangulate
 
 [dependencies]
 # Add support to convert a Polyhedron into a bevy Mesh.

@@ -22,6 +22,14 @@ impl Polyhedron {
             None => DEFAULT_INSET_OFFSET,
         };
         //FIXME: height parameter and default.
+
+        self.extrude(
+            Some(DEFAULT_INSET_HEIGHT),
+            Some(offset),
+            face_arity_mask,
+            false,
+        );
+
         if change_name {
             let params = if let Some(face_arity_mask) = face_arity_mask {
                 format!(
@@ -36,13 +44,6 @@ impl Polyhedron {
             };
             self.name = format!("i{}{}", params, self.name);
         }
-
-        self.extrude(
-            Some(DEFAULT_INSET_HEIGHT),
-            Some(offset),
-            face_arity_mask,
-            false,
-        );
 
         self
     }
