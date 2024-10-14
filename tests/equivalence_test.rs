@@ -26,6 +26,17 @@ mod equivalence_operator_tests {
 
         assert_eq!(I, dD);
     }
+
+    #[test]
+    fn equivalence_meta_op() {
+        let mT = Polyhedron::T().m().normalize().finalize();
+        let dbT = Polyhedron::T().b().d().normalize().finalize();
+        let kjT = Polyhedron::T().j().k().normalize().finalize();
+
+        assert_eq!(mT, kjT);
+        assert_eq!(mT, dbT);
+        assert_eq!(dbT, kjT);
+    }
 }
 
 #[allow(non_snake_case)]
@@ -130,7 +141,7 @@ mod equivalence_catalan_tests {
         let kC = Polyhedron::C().k().normalize().finalize();
         let mT = Polyhedron::T().m().normalize().finalize();
 
-        // NOTE: Orientation of kC and mT are not the same
+        // NOTE: ???
         assert_eq!(kC, mT);
     }
 
@@ -155,7 +166,7 @@ mod equivalence_catalan_tests {
         let gC = Polyhedron::C().g().normalize().finalize();
         let gO = Polyhedron::O().g().normalize().finalize();
 
-        // NOTE: Gyro error
+        // NOTE: gyro op error
         assert_eq!(gC, gO);
     }
 
@@ -188,7 +199,7 @@ mod equivalence_catalan_tests {
         let gD = Polyhedron::D().g().normalize().finalize();
         let gI = Polyhedron::I().g().normalize().finalize();
 
-        // Note: Gyro error
+        // Note: gyro op error
         assert_eq!(gD, gI);
     }
 }

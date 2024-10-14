@@ -97,8 +97,6 @@ impl Default for Polyhedron {
     }
 }
 
-const PARTIAL_EQ_PRECISION: u32 = 8u32;
-
 impl PartialEq for Polyhedron {
     fn eq(&self, other: &Self) -> bool {
         // FIXME: Orientation not considered

@@ -1,6 +1,6 @@
 use crate::*;
 
-const DEFAULT_KIS_HEIGHT: Float = 0.;
+const DEFAULT_KIS_HEIGHT: Float = 1. / 10.;
 
 impl Polyhedron {
     /// Creates a [kleetrope](https://en.wikipedia.org/wiki/Kleetope) from the

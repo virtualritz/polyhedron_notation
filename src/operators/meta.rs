@@ -1,8 +1,7 @@
 use crate::*;
 
-const DEFAULT_META_HEIGHT: Float = 1. / 10.;
 const DEFAULT_META_RATIO: Float = 1. / 2.;
-const DEFAULT_META_VALENCE: &[usize] = &[3];
+const DEFAULT_META_HEIGHT: Float = 1. / 10.;
 
 impl Polyhedron {
     /// Adds vertices at the center and along the edges.
@@ -30,33 +29,42 @@ impl Polyhedron {
             Some(h) => h.clamp(0.0, 1.0),
             None => DEFAULT_META_HEIGHT,
         };
-        let vertex_valence_mask = match vertex_valence_mask {
-            Some(v) => v.clamp(&[0], &[3]), // TODO: confirm
-            None => DEFAULT_META_VALENCE,
-        };
+
+        // FIXME: m != kj != db
 
         self.join(Some(ratio), false);
         self.kis(
             Some(height),
-            Some(vertex_valence_mask),
+            vertex_valence_mask,
             None,
             regular_faces_only,
             false,
         );
 
+        /*self.bevel(
+            Some(ratio),
+            Some(height),
+            vertex_valence_mask,
+            regular_faces_only,
+            change_name,
+        );
+        self.dual(change_name);*/
+
         if change_name {
             let mut params = match ratio != DEFAULT_META_RATIO
                 || height != DEFAULT_META_HEIGHT
-                || vertex_valence_mask != DEFAULT_META_VALENCE
             {
-                true => format!(
-                    "{},{},{}",
-                    format_float(ratio),
-                    format_float(height),
-                    format_integer_slice(vertex_valence_mask)
-                ),
+                true => {
+                    format!("{},{}", format_float(ratio), format_float(height))
+                }
                 false => "".to_string(),
             };
+            if let Some(vertex_valence_mask) = vertex_valence_mask {
+                params = format!(
+                    "{params},{}",
+                    format_integer_slice(vertex_valence_mask)
+                );
+            }
             if let Some(regular_faces_only) = regular_faces_only {
                 if regular_faces_only {
                     params.push_str(",{t}");
@@ -73,7 +81,7 @@ impl Polyhedron {
         self.meta(
             Some(DEFAULT_META_RATIO),
             Some(DEFAULT_META_HEIGHT),
-            Some(DEFAULT_META_VALENCE),
+            None,
             Some(false),
             true,
         )

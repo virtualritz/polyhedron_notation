@@ -12,7 +12,7 @@ repository = "https://github.com/virtualritz/polyhedron-ops/"
 documentation = "https://docs.rs/polyhedron-ops/"
 
 [features]
-default = ["f64", "ops"]
+default = ["ops"]
 f64 = []
 # Add support for reading/writing a mesh out as a Wavefront OBJ.
 obj = ["tobj"]
