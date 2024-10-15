@@ -1,5 +1,8 @@
 use crate::*;
 
+const DEFAULT_BEVEL_RATIO: Float = 1. / 2.;
+const DEFAULT_BEVEL_HEIGHT: Float = 0.;
+
 impl Polyhedron {
     /// Adds faces at the center, original vertices, and along the edges.
     ///
@@ -18,16 +21,24 @@ impl Polyhedron {
         regular_faces_only: Option<bool>,
         change_name: bool,
     ) -> &mut Self {
-        // TODO: Defaults
-        self.ambo(ratio, false);
-        self.truncate(height, face_arity_mask, regular_faces_only, false);
+        let ratio = match ratio {
+            Some(r) => r.clamp(0.0, 1.0),
+            None => DEFAULT_BEVEL_RATIO,
+        };
+        let height = match height {
+            Some(h) => h.clamp(0.0, 1.0),
+            None => DEFAULT_BEVEL_HEIGHT,
+        };
+
+        self.ambo(Some(ratio), false);
+        self.truncate(Some(height), face_arity_mask, regular_faces_only, false);
 
         if change_name {
             let mut params = String::new();
-            if let Some(ratio) = ratio {
+            if ratio != DEFAULT_BEVEL_RATIO {
                 write!(&mut params, "{}", format_float(ratio)).unwrap();
             }
-            if let Some(height) = height {
+            if height != DEFAULT_BEVEL_HEIGHT {
                 write!(&mut params, ",{}", format_float(height)).unwrap();
             } else {
                 write!(&mut params, ",").unwrap();
