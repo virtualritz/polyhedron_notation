@@ -49,9 +49,9 @@ impl Polyhedron {
                 Some(height),
                 vertex_valence_mask,
                 regular_faces_only,
-                change_name,
+                false,
             );
-            self.dual(change_name);
+            self.dual(false);
         }
 
         if change_name {

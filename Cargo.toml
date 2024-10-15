@@ -136,7 +136,7 @@ required-features = ["playground"]
 
 [[example]]
 name = "bevy"
-required-features = ["console"]
+required-features = ["bevy"]
 
 [package.metadata.docs.rs]
 features = ["nsi", "obj", "parser"]
