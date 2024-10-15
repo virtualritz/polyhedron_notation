@@ -26,17 +26,6 @@ mod equivalence_operator_tests {
 
         assert_eq!(I, dD);
     }
-
-    #[test]
-    fn equivalence_meta_op() {
-        let mT = Polyhedron::T().m().normalize().finalize();
-        let dbT = Polyhedron::T().b().d().normalize().finalize();
-        let kjT = Polyhedron::T().j().k().normalize().finalize();
-
-        assert_eq!(mT, kjT);
-        assert_eq!(mT, dbT);
-        assert_eq!(dbT, kjT);
-    }
 }
 
 #[allow(non_snake_case)]
@@ -138,11 +127,13 @@ mod equivalence_catalan_tests {
 
     #[test]
     fn equivalence_tetrakis_hexahedron() {
-        let kC = Polyhedron::C().k().normalize().finalize();
-        let mT = Polyhedron::T().m().normalize().finalize();
+        let k0p8C = Polyhedron::C()
+            .kis(Some(0.8), None, None, None, true)
+            .normalize()
+            .finalize();
+        let MT = Polyhedron::T().M().normalize().finalize();
 
-        // NOTE: ???
-        assert_eq!(kC, mT);
+        assert_eq!(k0p8C, MT);
     }
 
     #[test]
@@ -155,10 +146,10 @@ mod equivalence_catalan_tests {
 
     #[test]
     fn equivalence_disdyakis_dodecahedron() {
-        let mC = Polyhedron::C().m().normalize().finalize();
-        let mO = Polyhedron::O().m().normalize().finalize();
+        let MC = Polyhedron::C().M().normalize().finalize();
+        let MO = Polyhedron::O().M().normalize().finalize();
 
-        assert_eq!(mC, mO);
+        assert_eq!(MC, MO);
     }
 
     #[test]
@@ -188,10 +179,10 @@ mod equivalence_catalan_tests {
 
     #[test]
     fn equivalence_disdyakis_triacontahedron() {
-        let mD = Polyhedron::D().m().normalize().finalize();
-        let mI = Polyhedron::I().m().normalize().finalize();
+        let MD = Polyhedron::D().M().normalize().finalize();
+        let MI = Polyhedron::I().M().normalize().finalize();
 
-        assert_eq!(mD, mI);
+        assert_eq!(MD, MI);
     }
 
     #[test]

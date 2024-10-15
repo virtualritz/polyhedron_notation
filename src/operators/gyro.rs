@@ -1,7 +1,7 @@
 use crate::*;
 
 const DEFAULT_GYRO_RATIO: Float = 1. / 3.;
-const DEFAULT_GYRO_HEIGHT: Float = 1. / 5.;
+const DEFAULT_GYRO_HEIGHT: Float = 1. / 2.;
 
 impl Polyhedron {
     /// Splits each edge and connects new edges at the split point to the face

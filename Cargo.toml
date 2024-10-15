@@ -62,32 +62,32 @@ ops = [
 ]
 
 # Operator Definitions
-a = []                   # (a)mbo
-b = ["t", "a"]           # (b)evel
-c = []                   # (c)hamfer
-d = []                   # (d)ual
-e = ["a", "a"]           # (e)xpand
-g = []                   # (g)yro
-i = ["x"]                # (i)nset
-j = ["d", "a", "d"]      # (j)oin
-k = []                   # (k)is
-m = ["k", "j", "d", "b"] # (m)eta
-n = ["d", "t"]           # (n)eedle
-o = ["j", "j"]           # (o)rtho
-p = []                   # (p)ropellor
-q = []                   # (q)uinto
-r = []                   # (r)eflect
-s = ["d", "g", "d"]      # (s)nub
-t = ["d", "k", "d"]      # (t)runcate
-v = []                   # subdi(v)ide
-w = []                   # (w)hirl
-x = []                   # e(x)trude
-z = ["d", "k"]           # (z)ip
-K = ["d"]                # (K)-plane
-M = ["d", "t", "a"]      # (M)edial
-N = []                   # ca(N)onicalize
-S = []                   # (S)pherize
-Z = []                   # (Z)-triangulate
+a = []              # (a)mbo
+b = ["t", "a"]      # (b)evel
+c = []              # (c)hamfer
+d = []              # (d)ual
+e = ["a", "a"]      # (e)xpand
+g = []              # (g)yro
+i = ["x"]           # (i)nset
+j = ["d", "a", "d"] # (j)oin
+k = []              # (k)is
+m = ["k", "j"]      # (m)eta
+n = ["d", "t"]      # (n)eedle
+o = ["j", "j"]      # (o)rtho
+p = []              # (p)ropellor
+q = []              # (q)uinto
+r = []              # (r)eflect
+s = ["d", "g", "d"] # (s)nub
+t = ["d", "k", "d"] # (t)runcate
+v = []              # subdi(v)ide
+w = []              # (w)hirl
+x = []              # e(x)trude
+z = ["d", "k"]      # (z)ip
+K = ["d"]           # (K)-plane
+M = ["d", "b"]      # (M)edial
+N = []              # ca(N)onicalize
+S = []              # (S)pherize
+Z = []              # (Z)-triangulate
 
 [dependencies]
 bevy = { version = "0.14", default-features = false, features = [

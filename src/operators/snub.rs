@@ -1,7 +1,7 @@
 use crate::*;
 
-const DEFAULT_SNUB_HEIGHT: Float = 1. / 2.;
 const DEFAULT_SNUB_RATIO: Float = 1. / 3.;
+const DEFAULT_SNUB_HEIGHT: Float = 1. / 2.;
 
 impl Polyhedron {
     /// Applies a [snub](https://en.wikipedia.org/wiki/Snub_(geometry)) to the shape.
