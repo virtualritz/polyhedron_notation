@@ -9,6 +9,7 @@ mod parser_tests {
             Polyhedron::tetrahedron().ambo(Some(0.2), true).finalize();
 
         assert_eq!(poly_from_str.name(), poly_from_ops.name());
+        assert_eq!(poly_from_str, poly_from_ops);
     }
 
     // All tests for the remaining operators
@@ -20,6 +21,7 @@ mod parser_tests {
             .finalize();
 
         assert_eq!(poly_from_str.name(), poly_from_ops.name());
+        assert_eq!(poly_from_str, poly_from_ops);
     }
 
     #[test]
@@ -30,6 +32,7 @@ mod parser_tests {
             .finalize();
 
         assert_eq!(poly_from_str.name(), poly_from_ops.name());
+        assert_eq!(poly_from_str, poly_from_ops);
     }
 
     #[test]
@@ -40,6 +43,7 @@ mod parser_tests {
             .finalize();
 
         assert_eq!(poly_from_str.name(), poly_from_ops.name());
+        assert_eq!(poly_from_str, poly_from_ops);
     }
 
     #[test]
@@ -48,6 +52,7 @@ mod parser_tests {
         let poly_from_ops = Polyhedron::tetrahedron().dual(true).finalize();
 
         assert_eq!(poly_from_str.name(), poly_from_ops.name());
+        assert_eq!(poly_from_str, poly_from_ops);
     }
 
     #[test]
@@ -58,6 +63,7 @@ mod parser_tests {
             .finalize();
 
         assert_eq!(poly_from_str.name(), poly_from_ops.name());
+        assert_eq!(poly_from_str, poly_from_ops);
     }
 
     #[test]
@@ -68,6 +74,7 @@ mod parser_tests {
             .finalize();
 
         assert_eq!(poly_from_str.name(), poly_from_ops.name());
+        assert_eq!(poly_from_str, poly_from_ops);
     }
 
     #[test]
@@ -78,6 +85,7 @@ mod parser_tests {
             .finalize();
 
         assert_eq!(poly_from_str.name(), poly_from_ops.name());
+        assert_eq!(poly_from_str, poly_from_ops);
     }
 
     #[test]
@@ -88,6 +96,7 @@ mod parser_tests {
             .finalize();
 
         assert_eq!(poly_from_str.name(), poly_from_ops.name());
+        assert_eq!(poly_from_str, poly_from_ops);
     }
 
     #[test]
@@ -98,6 +107,7 @@ mod parser_tests {
             .finalize();
 
         assert_eq!(poly_from_str.name(), poly_from_ops.name());
+        assert_eq!(poly_from_str, poly_from_ops);
     }
 
     #[test]
@@ -108,6 +118,7 @@ mod parser_tests {
             .finalize();
 
         assert_eq!(poly_from_str.name(), poly_from_ops.name());
+        assert_eq!(poly_from_str, poly_from_ops);
     }
 
     #[test]
@@ -118,6 +129,7 @@ mod parser_tests {
             .finalize();
 
         assert_eq!(poly_from_str.name(), poly_from_ops.name());
+        assert_eq!(poly_from_str, poly_from_ops);
     }
 
     #[test]
@@ -127,6 +139,7 @@ mod parser_tests {
             Polyhedron::tetrahedron().ortho(Some(0.8), true).finalize();
 
         assert_eq!(poly_from_str.name(), poly_from_ops.name());
+        assert_eq!(poly_from_str, poly_from_ops);
     }
 
     #[test]
@@ -137,6 +150,7 @@ mod parser_tests {
             .finalize();
 
         assert_eq!(poly_from_str.name(), poly_from_ops.name());
+        assert_eq!(poly_from_str, poly_from_ops);
     }
 
     #[test]
@@ -146,6 +160,7 @@ mod parser_tests {
             Polyhedron::tetrahedron().quinto(Some(0.2), true).finalize();
 
         assert_eq!(poly_from_str.name(), poly_from_ops.name());
+        assert_eq!(poly_from_str, poly_from_ops);
     }
 
     #[test]
@@ -154,6 +169,7 @@ mod parser_tests {
         let poly_from_ops = Polyhedron::tetrahedron().reflect(true).finalize();
 
         assert_eq!(poly_from_str.name(), poly_from_ops.name());
+        assert_eq!(poly_from_str, poly_from_ops);
     }
 
     #[test]
@@ -164,6 +180,7 @@ mod parser_tests {
             .finalize();
 
         assert_eq!(poly_from_str.name(), poly_from_ops.name());
+        assert_eq!(poly_from_str, poly_from_ops);
     }
 
     #[test]
@@ -174,6 +191,7 @@ mod parser_tests {
             .finalize();
 
         assert_eq!(poly_from_str.name(), poly_from_ops.name());
+        assert_eq!(poly_from_str, poly_from_ops);
     }
 
     #[test]
@@ -184,6 +202,7 @@ mod parser_tests {
             .finalize();
 
         assert_eq!(poly_from_str.name(), poly_from_ops.name());
+        assert_eq!(poly_from_str, poly_from_ops);
     }
 
     #[test]
@@ -194,6 +213,7 @@ mod parser_tests {
             .finalize();
 
         assert_eq!(poly_from_str.name(), poly_from_ops.name());
+        assert_eq!(poly_from_str, poly_from_ops);
     }
 
     #[test]
@@ -204,5 +224,6 @@ mod parser_tests {
             .finalize();
 
         assert_eq!(poly_from_str.name(), poly_from_ops.name());
+        assert_eq!(poly_from_str, poly_from_ops);
     }
 }

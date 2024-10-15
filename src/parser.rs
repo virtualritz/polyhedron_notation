@@ -340,7 +340,6 @@ impl TryFrom<&str> for Polyhedron {
                 }
                 _ => (),
             }
-            poly.normalize();
         });
 
         Ok(poly)
