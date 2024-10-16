@@ -93,6 +93,9 @@ impl Polyhedron {
             })
             .collect();
 
+        self.dual(false);
+        self.dual(false);
+
         if change_name {
             let params = match ratio != DEFAULT_GYRO_RATIO
                 || height != DEFAULT_GYRO_HEIGHT

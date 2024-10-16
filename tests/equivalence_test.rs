@@ -157,7 +157,7 @@ mod equivalence_catalan_tests {
         let gC = Polyhedron::C().g().normalize().finalize();
         let gO = Polyhedron::O().g().normalize().finalize();
 
-        // NOTE: gyro op error
+        // NOTE: Orientations of gC and gO are not the same
         assert_eq!(gC, gO);
     }
 
@@ -190,7 +190,7 @@ mod equivalence_catalan_tests {
         let gD = Polyhedron::D().g().normalize().finalize();
         let gI = Polyhedron::I().g().normalize().finalize();
 
-        // Note: gyro op error
+        // NOTE: Orientations of gD and gI are not the same
         assert_eq!(gD, gI);
     }
 }
