@@ -30,14 +30,14 @@ impl Polyhedron {
             None => DEFAULT_MEDIAL_HEIGHT,
         };
 
-        self.bevel(
+        // FIXME: perform meta operation for now
+        self.meta(
             Some(ratio),
             Some(height),
             vertex_valence_mask,
             regular_faces_only,
             false,
         );
-        self.dual(false);
 
         if change_name {
             let mut params = String::new();

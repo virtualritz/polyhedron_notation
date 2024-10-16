@@ -131,9 +131,9 @@ mod equivalence_catalan_tests {
             .kis(Some(0.8), None, None, None, true)
             .normalize()
             .finalize();
-        let MT = Polyhedron::T().M().normalize().finalize();
+        let mT = Polyhedron::T().m().normalize().finalize();
 
-        assert_eq!(k0p8C, MT);
+        assert_eq!(k0p8C, mT);
     }
 
     #[test]
@@ -146,10 +146,10 @@ mod equivalence_catalan_tests {
 
     #[test]
     fn equivalence_disdyakis_dodecahedron() {
-        let MC = Polyhedron::C().M().normalize().finalize();
-        let MO = Polyhedron::O().M().normalize().finalize();
+        let mC = Polyhedron::C().m().normalize().finalize();
+        let mO = Polyhedron::O().m().normalize().finalize();
 
-        assert_eq!(MC, MO);
+        assert_eq!(mC, mO);
     }
 
     #[test]
@@ -179,10 +179,10 @@ mod equivalence_catalan_tests {
 
     #[test]
     fn equivalence_disdyakis_triacontahedron() {
-        let MD = Polyhedron::D().M().normalize().finalize();
-        let MI = Polyhedron::I().M().normalize().finalize();
+        let mD = Polyhedron::D().m().normalize().finalize();
+        let mI = Polyhedron::I().m().normalize().finalize();
 
-        assert_eq!(MD, MI);
+        assert_eq!(mD, mI);
     }
 
     #[test]

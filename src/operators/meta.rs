@@ -1,18 +1,9 @@
 use crate::*;
 
 const DEFAULT_META_RATIO: Float = 1. / 2.;
-const DEFAULT_META_HEIGHT: Float = 1. / 10.;
+const DEFAULT_META_HEIGHT: Float = 0.;
 
 impl Polyhedron {
-    /// Adds vertices at the center and along the edges.
-    ///
-    /// # Arguments
-    ///
-    /// * `ratio` – The ratio of the new vertices to the original vertices.
-    /// * `height` – The height of the new vertices.
-    /// * `vertex_valence_mask` – Only vertices matching the given valences
-    ///  will be affected.
-    /// * `regular_faces_only` – Only regular faces will be affected.
     pub fn meta(
         &mut self,
         ratio: Option<Float>,
@@ -30,24 +21,23 @@ impl Polyhedron {
             None => DEFAULT_META_HEIGHT,
         };
 
-        self.join(Some(ratio), false);
-        self.kis(
+        self.bevel(
+            Some(ratio),
             Some(height),
             vertex_valence_mask,
-            None,
             regular_faces_only,
             false,
         );
+        self.dual(false);
 
         if change_name {
-            let mut params = match ratio != DEFAULT_META_RATIO
-                || height != DEFAULT_META_HEIGHT
-            {
-                true => {
-                    format!("{},{}", format_float(ratio), format_float(height))
-                }
-                false => "".to_string(),
-            };
+            let mut params = String::new();
+            if ratio != DEFAULT_META_RATIO {
+                params = format!("{}", format_float(ratio));
+            }
+            if height != DEFAULT_META_HEIGHT {
+                params = format!("{params},{}", format_float(height));
+            }
             if let Some(vertex_valence_mask) = vertex_valence_mask {
                 params = format!(
                     "{params},{}",
@@ -65,14 +55,9 @@ impl Polyhedron {
         self
     }
 
+    #[allow(non_snake_case)]
     #[inline]
     pub fn m(&mut self) -> &mut Self {
-        self.meta(
-            Some(DEFAULT_META_RATIO),
-            Some(DEFAULT_META_HEIGHT),
-            None,
-            Some(false),
-            true,
-        )
+        self.meta(None, None, None, Some(false), true)
     }
 }
