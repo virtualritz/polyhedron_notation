@@ -32,7 +32,7 @@ impl Polyhedron {
             .flat_map(|face| {
                 let face_positions = index_as_positions(face, &self.positions);
                 let center = centroid_ref(&face_positions)
-                    + average_normal_ref(&face_positions).unwrap() * height;
+                    + average_normal_ref(&face_positions) * height;
                 face.iter()
                     .enumerate()
                     .map(|v| {

@@ -53,10 +53,7 @@ pub(crate) fn _centroid_spherical_ref(
     positions: &PointsRefSlice,
     spherical: Float,
 ) -> Point {
-    let point: Point = positions
-        .iter()
-        .fold(Point::zero(), |sum, point| sum + **point)
-        / positions.len() as Float;
+    let point: Point = centroid_ref(positions);
 
     if spherical != 0.0 {
         let avg_mag =
@@ -91,11 +88,13 @@ pub(crate) fn ordered_vertex_edges_recurse(
     k: usize,
 ) -> Edges {
     if k < vfaces.len() {
-        let i = index_of(&v, face).unwrap();
-        /*match index_of(&v, face) {
+        let i = match index_of(&v, face) {
             Some(i) => i,
-            None => return vec![],
-        };*/
+            None => {
+                assert!(false, "Index not found!");
+                return vec![];
+            }
+        };
         let j = (i + face.len() - 1) % face.len();
         let edge = [v, face[j]];
         let nface = face_with_edge(&edge, vfaces);
@@ -113,7 +112,13 @@ pub(crate) fn ordered_vertex_edges(v: VertexKey, vfaces: &FacesSlice) -> Edges {
         vec![]
     } else {
         let face = &vfaces[0];
-        let i = index_of(&v, face).unwrap();
+        let i = match index_of(&v, face) {
+            Some(i) => i,
+            None => {
+                assert!(false, "Index not found!");
+                return vec![];
+            }
+        };
         let j = (i + face.len() - 1) % face.len();
         let edge = [v, face[j]];
         let nface = face_with_edge(&edge, vfaces);
@@ -140,7 +145,13 @@ pub(crate) fn positions_to_faces(
             .iter()
             .map(|original_face|
                 // With vertex faces in left-hand order.
-                index_of(original_face, face_index).unwrap() as VertexKey)
+                match index_of(original_face, face_index){
+                    Some(i) => i,
+                    None => {
+                        assert!(false, "Index not found!");
+                        return 0 as VertexKey;
+                    }
+                } as VertexKey)
             .collect()
         })
         .collect()
@@ -253,7 +264,13 @@ pub(crate) fn ordered_vertex_faces_recurse(
     k: VertexKey,
 ) -> Faces {
     if (k as usize) < face_index.len() {
-        let i = index_of(&v, cface).unwrap() as i32;
+        let i = match index_of(&v, cface) {
+            Some(i) => i,
+            None => {
+                assert!(false, "Index not found!");
+                return Faces::new();
+            }
+        } as i32;
         let j = ((i - 1 + cface.len() as i32) % cface.len() as i32) as usize;
         let edge = [v, cface[j]];
         let mut nfaces = vec![face_with_edge(&edge, face_index)];
@@ -370,7 +387,7 @@ pub(crate) fn _planar_area_ref(positions: &PointsRefSlice) -> Float {
             sum + position.0.cross(**position.1)
         });
 
-    average_normal_ref(positions).unwrap().dot(sum).abs() * 0.5
+    average_normal_ref(positions).dot(sum).abs() * 0.5
 }
 
 #[inline]
@@ -442,7 +459,7 @@ pub(crate) fn _average_edge_distance(positions: &PointsRefSlice) -> Float {
 /// Tries to do the right thing if the face
 /// is non-planar or degenerate.
 #[inline]
-pub(crate) fn average_normal_ref(positions: &PointsRefSlice) -> Option<Normal> {
+pub(crate) fn average_normal_ref(positions: &PointsRefSlice) -> Normal {
     let mut considered_edges = 0;
 
     let normal = positions
@@ -463,14 +480,14 @@ pub(crate) fn average_normal_ref(positions: &PointsRefSlice) -> Option<Normal> {
         });
 
     if considered_edges != 0 {
-        Some(normal / considered_edges as Float)
+        normal / considered_edges as Float
     } else {
         // Degenerate/zero size face.
         //None
 
         // We just return the normalized vector
         // from the origin to the center of the face.
-        Some(centroid_ref(positions).normalized())
+        centroid_ref(positions).normalized()
     }
 }
 
@@ -524,7 +541,7 @@ pub(crate) fn _are_collinear_f64(v0: &Point, v1: &Point, v2: &Point) -> bool {
 }
 
 #[inline]
-pub(crate) fn _face_normal_f64(positions: &PointsRefSlice) -> Option<Normal> {
+pub(crate) fn _face_normal_f64(positions: &PointsRefSlice) -> Normal {
     let mut considered_edges = 0;
 
     let normal = positions.iter().circular_tuple_windows::<(_, _, _)>().fold(
@@ -545,17 +562,12 @@ pub(crate) fn _face_normal_f64(positions: &PointsRefSlice) -> Option<Normal> {
 
     if considered_edges != 0 {
         let n = normal / considered_edges as f64;
-        Some(Vector::new(n.x as _, n.y as _, n.z as _))
+        Vector::new(n.x as _, n.y as _, n.z as _)
     } else {
         // Total degenerate or zero size face.
         // We just return the normalized vector
         // from the origin to the center of the face.
-        //Some(centroid_ref(positions).normalized())
-
-        // FIXME: this branch should return None.
-        // We need a method to cleanup geometry
-        // of degenrate faces/edges instead.
-        None
+        centroid_ref(positions).normalized()
     }
 }
 
@@ -717,7 +729,7 @@ pub(crate) fn _reciprocate_faces(
         .map(|face| {
             let face_positions = index_as_positions(face, positions);
             let centroid = centroid_ref(&face_positions);
-            let normal = average_normal_ref(&face_positions).unwrap();
+            let normal = average_normal_ref(&face_positions);
             let c_dot_n = centroid.dot(normal);
             let edge_distance = _average_edge_distance(&face_positions);
             reciprocal(&(normal * c_dot_n)) * (1.0 + edge_distance) * 0.5

@@ -1,6 +1,8 @@
 use crate::*;
 use num_traits::float::FloatConst;
 
+const DEFAULT_PRISM_DIMENSION: usize = 3;
+
 /// # Base Shapes
 ///
 /// Start shape creation methods.
@@ -205,7 +207,10 @@ impl Polyhedron {
 
     /// common code for prism and antiprism
     fn protoprism(n: Option<usize>, anti: bool) -> Self {
-        let n = n.unwrap_or(3);
+        let n = match n {
+            Some(n) => n,
+            None => DEFAULT_PRISM_DIMENSION,
+        };
 
         // Angles.
         let theta = Float::TAU() / n as Float;

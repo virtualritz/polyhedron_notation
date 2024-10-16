@@ -28,6 +28,7 @@ impl Polyhedron {
             Some(h) => h.clamp(0.0, 1.0),
             None => DEFAULT_GYRO_HEIGHT,
         };
+
         let edges = self.to_edges();
         let reversed_edges: Edges =
             edges.par_iter().map(|edge| [edge[1], edge[0]]).collect();
@@ -41,8 +42,7 @@ impl Polyhedron {
                 let fp = index_as_positions(face, &self.positions);
                 (
                     face.as_slice(),
-                    centroid_ref(&fp)
-                        + average_normal_ref(&fp).unwrap() * height,
+                    centroid_ref(&fp) + average_normal_ref(&fp) * height,
                 )
             })
             .chain(edges.par_iter().enumerate().flat_map(|edge| {

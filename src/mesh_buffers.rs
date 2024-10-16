@@ -44,7 +44,6 @@ impl Polyhedron {
                                     face,
                                     self.positions(),
                                 ))
-                                .unwrap()
                             } else {
                                 normal / mag_sq.sqrt()
                             },

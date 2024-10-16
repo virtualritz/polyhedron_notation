@@ -35,7 +35,7 @@ impl Polyhedron {
                             **face_vertex_point.1
                                 + offset.unwrap_or(0.0)
                                     * (centroid - **face_vertex_point.1)
-                                + average_normal_ref(&face_positions).unwrap()
+                                + average_normal_ref(&face_positions)
                                     * height.unwrap_or(DEFAULT_EXTRUDE_HEIGHT),
                         )
                     })

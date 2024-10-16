@@ -35,7 +35,6 @@ impl Polyhedron {
                             face,
                             &self.positions,
                         ))
-                        .unwrap()
                     })
                     .fold(Normal::zero(), |accumulate, normal| {
                         accumulate + normal

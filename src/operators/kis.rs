@@ -48,8 +48,7 @@ impl Polyhedron {
                     Some((
                         face.as_slice(),
                         centroid_ref(&face_positions)
-                            + average_normal_ref(&face_positions).unwrap()
-                                * height,
+                            + average_normal_ref(&face_positions) * height,
                     ))
                 } else {
                     None

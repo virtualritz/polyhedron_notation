@@ -13,7 +13,6 @@ documentation = "https://docs.rs/polyhedron-ops/"
 
 [features]
 default = ["f64", "ops"]
-alt = [] # Use alternative implementations for some operators
 bevy = ["dep:bevy", "dep:bevy_panorbit_camera"]
 f64 = ["tobj/use_f64"] # Add support for double precision (64bit floating point)
 nsi = ["dep:nsi-core", "dep:bytemuck"] # NSI support
