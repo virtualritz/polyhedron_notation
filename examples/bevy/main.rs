@@ -10,7 +10,8 @@ use bevy::{
         DirectionalLightShadowMap, PbrBundle, StandardMaterial,
     },
     prelude::{
-        Component, PluginGroup, Query, Res, Time, Update, Window, WindowPlugin,
+        ClearColor, Component, PluginGroup, Query, Res, Time, Update, Window,
+        WindowPlugin,
     },
     render::{mesh::Mesh, view::Msaa},
     transform::components::Transform,
@@ -20,7 +21,7 @@ use bevy::{
 };
 use bevy_panorbit_camera::{PanOrbitCamera, PanOrbitCameraPlugin};
 use polyhedron_ops::Polyhedron;
-use std::f32::consts::TAU;
+use std::f64::consts::PI;
 
 #[cfg(feature = "console")]
 mod console;
@@ -29,13 +30,14 @@ use console::prelude::*;
 
 #[derive(Component)]
 pub struct RootPolyhedron {
-    speed: f32,
+    speed: f64,
 }
 
 fn main() {
     let mut app = App::new();
 
     app.insert_resource(Msaa::Sample4)
+        .insert_resource(ClearColor(Color::srgb(0., 0., 0.)))
         .insert_resource(DirectionalLightShadowMap { size: 2048 })
         .add_plugins(DefaultPlugins.set(WindowPlugin {
             primary_window: Some(Window {
@@ -116,6 +118,8 @@ fn rotate_polyhedron(
     timer: Res<Time>,
 ) {
     for (mut transform, polyhedron) in &mut polyhedra {
-        transform.rotate_y(polyhedron.speed * TAU * timer.delta_seconds());
+        transform.rotate_y(
+            (polyhedron.speed * PI * timer.delta_seconds() as f64) as f32,
+        );
     }
 }
