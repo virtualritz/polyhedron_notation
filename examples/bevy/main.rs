@@ -9,10 +9,7 @@ use bevy::{
         light_consts, DirectionalLight, DirectionalLightBundle,
         DirectionalLightShadowMap, PbrBundle, StandardMaterial,
     },
-    prelude::{
-        ClearColor, Component, PluginGroup, Query, Res, Time, Update, Window,
-        WindowPlugin,
-    },
+    prelude::*,
     render::{mesh::Mesh, view::Msaa},
     transform::components::Transform,
     utils::default,
@@ -42,7 +39,7 @@ fn main() {
         .add_plugins(DefaultPlugins.set(WindowPlugin {
             primary_window: Some(Window {
                 resizable: true,
-                mode: WindowMode::BorderlessFullscreen,
+                mode: WindowMode::Windowed,
                 visible: true,
                 title: "Polyhedron-Ops".to_string(),
                 ..Default::default()
@@ -51,7 +48,7 @@ fn main() {
         }))
         .add_plugins(PanOrbitCameraPlugin)
         .add_systems(Startup, setup)
-        .add_systems(Update, rotate_polyhedron);
+        .add_systems(Update, (rotate_polyhedron, window_update));
 
     #[cfg(feature = "console")]
     app.add_plugins(ConsolePlugin)
@@ -121,5 +118,18 @@ fn rotate_polyhedron(
         transform.rotate_y(
             (polyhedron.speed * PI * timer.delta_seconds() as f64) as f32,
         );
+    }
+}
+
+fn window_update(
+    keys: Res<ButtonInput<KeyCode>>,
+    mut windows: Query<&mut Window>,
+) {
+    let mut window = windows.single_mut();
+    if keys.just_pressed(KeyCode::F11) {
+        window.mode = match window.mode {
+            WindowMode::Windowed => WindowMode::BorderlessFullscreen,
+            _ => WindowMode::Windowed,
+        };
     }
 }
