@@ -13,7 +13,7 @@ use bevy::{
     render::{mesh::Mesh, view::Msaa},
     transform::components::Transform,
     utils::default,
-    window::WindowMode,
+    window::{CursorGrabMode, WindowMode},
     DefaultPlugins,
 };
 use bevy_panorbit_camera::{PanOrbitCamera, PanOrbitCameraPlugin};
@@ -127,9 +127,17 @@ fn window_update(
 ) {
     let mut window = windows.single_mut();
     if keys.just_pressed(KeyCode::F11) {
-        window.mode = match window.mode {
-            WindowMode::Windowed => WindowMode::BorderlessFullscreen,
-            _ => WindowMode::Windowed,
+        match window.mode {
+            WindowMode::Windowed => {
+                window.mode = WindowMode::BorderlessFullscreen;
+                window.cursor.visible = false;
+                window.cursor.grab_mode = CursorGrabMode::Confined;
+            }
+            _ => {
+                window.mode = WindowMode::Windowed;
+                window.cursor.visible = true;
+                window.cursor.grab_mode = CursorGrabMode::None;
+            }
         };
     }
 }
