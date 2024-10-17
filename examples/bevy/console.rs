@@ -32,9 +32,7 @@ pub fn render_command(
         let update = || -> Result<String, Box<dyn Error>> {
             let polyhedron = render(conway)?;
             let mesh_handle = mesh_query.get_single()?;
-            let mesh = meshes
-                .get_mut(mesh_handle)
-                .ok_or("Root polyhedron mesh not found")?;
+            let mesh = meshes.get_mut(mesh_handle).ok_or("")?;
             let name = polyhedron.name().clone();
             let _ = replace::<Mesh>(mesh, Mesh::from(polyhedron));
             Ok(name)

@@ -86,4 +86,9 @@ impl Polyhedron {
 
         self
     }
+
+    #[inline]
+    pub fn p(&mut self) -> &mut Self {
+        self.propellor(Some(DEFAULT_PROPELLOR_RATIO), true)
+    }
 }
