@@ -1,5 +1,5 @@
 #![allow(clippy::many_single_char_names)]
-#![feature(iter_array_chunks)]
+#![cfg_attr(feature = "obj", feature(iter_array_chunks))]
 //! # Conway-Hart Polyhedron Operations
 //!
 //! This crate implements the [Conway Polyhedron
