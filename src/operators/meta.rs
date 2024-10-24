@@ -4,6 +4,15 @@ const DEFAULT_META_RATIO: Float = 1. / 2.;
 const DEFAULT_META_HEIGHT: Float = 0.;
 
 impl Polyhedron {
+    /// Adds vertices at the center and along the edges.
+    ///
+    /// # Arguments
+    ///
+    /// * `ratio` – The ratio of the new vertices to the original vertices.
+    /// * `height` – The height of the new vertices.
+    /// * `vertex_valence_mask` – Only vertices matching the given valences
+    ///  will be affected.
+    /// * `regular_faces_only` – Only regular faces will be affected.
     pub fn meta(
         &mut self,
         ratio: Option<Float>,
