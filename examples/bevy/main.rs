@@ -80,7 +80,7 @@ fn setup(
                 base_color: Color::srgb(0.5, 0.5, 0.5),
                 double_sided: true,
                 metallic: 0.9,
-                diffuse_transmission: 0.1,
+                diffuse_transmission: 0.5,
                 ..Default::default()
             }),
             ..Default::default()
