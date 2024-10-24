@@ -1,5 +1,7 @@
 use crate::*;
 
+const DEFAULT_SPHERIZE_STRENGTH: Float = 1.;
+
 impl Polyhedron {
     /// Projects all positions on the unit sphere (at `strength` `1.0`).
     ///
@@ -13,20 +15,23 @@ impl Polyhedron {
         strength: Option<Float>,
         change_name: bool,
     ) -> &mut Self {
-        // TODO: Default
-        let strength_ = strength.unwrap_or(1.0);
+        let strength = match strength {
+            Some(s) => s,
+            None => DEFAULT_SPHERIZE_STRENGTH,
+        };
 
-        if 0.0 != strength_ {
+        if 0.0 != strength {
             self.positions.par_iter_mut().for_each(|point| {
                 *point =
-                    (1.0 - strength_) * *point + strength_ * point.normalized();
+                    (1.0 - strength) * *point + strength * point.normalized();
             });
 
             if change_name {
-                let mut params = String::new();
-                if let Some(strength) = strength {
-                    write!(&mut params, "{}", format_float(strength)).unwrap();
-                }
+                let params = if strength != DEFAULT_SPHERIZE_STRENGTH {
+                    format!("{}", format_float(strength))
+                } else {
+                    "".to_string()
+                };
                 self.name = format!("S{}{}", params, self.name);
             }
         }
