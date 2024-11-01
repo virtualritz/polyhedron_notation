@@ -1,8 +1,0 @@
-- Create inset_kis for "i" (dk)
-- Rename extrude to ???
-- Create qt for x
-- Fix unwraps
-- average_normal_ref return Normal rather than Some(Normal)
-- rename planarize to plane
-- replace name with operation list
-- parser macro for string to functions
