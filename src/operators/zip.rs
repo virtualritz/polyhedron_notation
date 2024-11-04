@@ -34,7 +34,7 @@ impl Polyhedron {
         if change_name {
             let mut params = String::new();
             if height != DEFAULT_ZIP_HEIGHT {
-                params = format!("{}", format_float(height));
+                params = format_float(height);
             }
             if let Some(face_arity_mask) = face_arity_mask {
                 params = format!(

@@ -103,7 +103,7 @@ impl Polyhedron {
                 true => {
                     format!("{},{}", format_float(ratio), format_float(height))
                 }
-                false => "".to_string(),
+                false => String::new(),
             };
             self.name = format!("g{}{}", params, self.name);
         }

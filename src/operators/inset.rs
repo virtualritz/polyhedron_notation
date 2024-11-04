@@ -21,7 +21,7 @@ impl Polyhedron {
             Some(o) => o.clamp(0.0, 1.0),
             None => DEFAULT_INSET_OFFSET,
         };
-        //FIXME: height parameter and default.
+        //FIXME: Height parameter and default.
 
         self.extrude(
             Some(DEFAULT_INSET_HEIGHT),
@@ -38,9 +38,9 @@ impl Polyhedron {
                     format_integer_slice(face_arity_mask)
                 )
             } else if offset != DEFAULT_INSET_OFFSET {
-                format!("{}", format_float(offset))
+                format_float(offset)
             } else {
-                "".to_string()
+                String::new()
             };
             self.name = format!("i{}{}", params, self.name);
         }

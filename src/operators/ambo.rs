@@ -71,7 +71,7 @@ impl Polyhedron {
         if change_name {
             let params = match ratio != DEFAULT_AMBO_RATIO {
                 true => format_float(ratio),
-                false => "".to_string(),
+                false => String::new(),
             };
             self.name = format!("a{}{}", params, self.name);
         }

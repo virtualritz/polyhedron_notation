@@ -98,7 +98,7 @@ impl Polyhedron {
         if change_name {
             let params = match ratio != DEFAULT_CHAMFER_RATIO {
                 true => format_float(ratio),
-                false => "".to_string(),
+                false => String::new(),
             };
             self.name = format!("c{}{}", params, self.name);
         }

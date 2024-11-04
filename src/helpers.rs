@@ -91,7 +91,6 @@ pub(crate) fn ordered_vertex_edges_recurse(
         let i = match index_of(&v, face) {
             Some(i) => i,
             None => {
-                assert!(false, "Index not found!");
                 return vec![];
             }
         };
@@ -115,7 +114,6 @@ pub(crate) fn ordered_vertex_edges(v: VertexKey, vfaces: &FacesSlice) -> Edges {
         let i = match index_of(&v, face) {
             Some(i) => i,
             None => {
-                assert!(false, "Index not found!");
                 return vec![];
             }
         };
@@ -145,13 +143,7 @@ pub(crate) fn positions_to_faces(
             .iter()
             .map(|original_face|
                 // With vertex faces in left-hand order.
-                match index_of(original_face, face_index){
-                    Some(i) => i,
-                    None => {
-                        assert!(false, "Index not found!");
-                        return 0 as VertexKey;
-                    }
-                } as VertexKey)
+                index_of(original_face, face_index).unwrap_or(0) as VertexKey)
             .collect()
         })
         .collect()
@@ -267,7 +259,6 @@ pub(crate) fn ordered_vertex_faces_recurse(
         let i = match index_of(&v, cface) {
             Some(i) => i,
             None => {
-                assert!(false, "Index not found!");
                 return Faces::new();
             }
         } as i32;
@@ -499,13 +490,7 @@ pub(crate) fn _angle_between(
 ) -> Float {
     // Protection against inaccurate computation.
     let x = u.normalized().dot(v.normalized());
-    let y = if x <= -1.0 {
-        -1.0
-    } else if x >= 1.0 {
-        1.0
-    } else {
-        x
-    };
+    let y = x.clamp(-1.0, 1.0);
 
     let angle = y.acos();
 

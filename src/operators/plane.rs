@@ -32,7 +32,7 @@ impl Polyhedron {
         if change_name {
             let params = match iterations != DEFAULT_PLANE_ITER {
                 true => iterations.to_string(),
-                false => "".to_string(),
+                false => String::new(),
             };
             self.name = format!("K{}{}", params, self.name);
         }

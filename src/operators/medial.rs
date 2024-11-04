@@ -42,7 +42,7 @@ impl Polyhedron {
         if change_name {
             let mut params = String::new();
             if ratio != DEFAULT_MEDIAL_RATIO {
-                params = format!("{}", format_float(ratio));
+                params = format_float(ratio);
             }
             if height != DEFAULT_MEDIAL_HEIGHT {
                 params = format!("{params},{}", format_float(height));

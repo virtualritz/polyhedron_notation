@@ -80,8 +80,8 @@ impl Polyhedron {
 
         if change_name {
             let mut params = match height != DEFAULT_KIS_HEIGHT {
-                true => format!("{}", format_float(height)),
-                false => "".to_string(),
+                true => format_float(height),
+                false => String::new(),
             };
             if let Some(face_arity_mask) = face_arity_mask {
                 params = format!(

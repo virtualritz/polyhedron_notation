@@ -26,8 +26,8 @@ impl Polyhedron {
 
         if change_name {
             let params = match ratio != DEFAULT_JOIN_RATIO {
-                true => format!("{}", format_float(ratio)),
-                false => "".to_string(),
+                true => format_float(ratio),
+                false => String::new(),
             };
             self.name = format!("j{}{}", params, self.name);
         }

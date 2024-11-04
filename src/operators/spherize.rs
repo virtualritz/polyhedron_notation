@@ -28,9 +28,9 @@ impl Polyhedron {
 
             if change_name {
                 let params = if strength != DEFAULT_SPHERIZE_STRENGTH {
-                    format!("{}", format_float(strength))
+                    format_float(strength)
                 } else {
-                    "".to_string()
+                    String::new()
                 };
                 self.name = format!("S{}{}", params, self.name);
             }

@@ -104,7 +104,7 @@ impl Polyhedron {
         if change_name {
             let params = match height != DEFAULT_QUINTO_HEIGHT {
                 true => format_float(height),
-                false => "".to_string(),
+                false => String::new(),
             };
             self.name = format!("q{}{}", params, self.name);
         }

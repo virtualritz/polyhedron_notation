@@ -79,7 +79,7 @@ impl Polyhedron {
         if change_name {
             let params = match ratio != DEFAULT_PROPELLOR_RATIO {
                 true => format_float(ratio),
-                false => "".to_string(),
+                false => String::new(),
             };
             self.name = format!("p{}{}", params, self.name);
         }

@@ -25,7 +25,7 @@ impl Polyhedron {
         if change_name {
             let params = match height != DEFAULT_EXPAND_HEIGHT {
                 true => format_float(height),
-                false => "".to_string(),
+                false => String::new(),
             };
             self.name = format!("e{}{}", params, self.name);
         }
